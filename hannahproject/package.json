@@ -3,9 +3,18 @@
   "version": "1.0.0",
   "description": "for hannah",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "start": "node vanyawork.js "
   },
   "author": "hannaj",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^2.7.0",
+    "prime-number-check": "^1.0.1"
+  },
+  "devDependencies": {
+    "jest": "^30.0.5"
+  }
 }
