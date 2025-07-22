@@ -1,0 +1,97 @@
+openapi: 3.0.0
+info:
+  title: Currency Exchange API
+  version: 1.0.0
+  description: API to get and compare currency exchange rates
+
+paths:
+  /currency/rate:
+    get:
+      summary: Get the current exchange rate for a specific currency
+      parameters:
+        - name: baseCurrency
+          in: query
+          description: The base currency to get the exchange rate for
+          required: true
+          schema:
+            type: string
+        - name: targetCurrency
+          in: query
+          description: The target currency to compare the exchange rate to
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Current exchange rate between the currencies
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  baseCurrency:
+                    type: string
+                  targetCurrency:
+                    type: string
+                  exchangeRate:
+                    type: number
+                    format: float
+                  timestamp:
+                    type: string
+                    format: date-time
+                    description: The time the rate was retrieved
+                  currencyId:
+                    type: string
+                    description: Unique identifier for the currency pair
+        '400':
+          description: Invalid request, missing parameters or incorrect format
+        '404':
+          description: Currency pair not found
+  /currency/compare:
+    get:
+      summary: Compare exchange rates between two or more currencies
+      parameters:
+        - name: baseCurrency
+          in: query
+          description: The base currency to compare against
+          required: true
+          schema:
+            type: string
+        - name: targetCurrencies
+          in: query
+          description: List of target currencies to compare the base currency with
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: Comparison of exchange rates for multiple currencies
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  baseCurrency:
+                    type: string
+                  targetCurrencies:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        currency:
+                          type: string
+                        exchangeRate:
+                          type: number
+                          format: float
+                        currencyId:
+                          type: string
+                  timestamp:
+                    type: string
+                    format: date-time
+                    description: The time the rates were retrieved
+        '400':
+          description: Invalid request, missing parameters or incorrect format
+        '404':
+          description: Currency pair(s) not found
