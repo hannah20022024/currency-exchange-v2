@@ -1,0 +1,36 @@
+openapi: 3.0.0          
+info:                    
+  title: Currency Exchange API   
+  version: 1.0.0         
+
+paths:                   
+  /watchlists:          
+    get:                
+      summary: Get user's watchlists    
+      parameters:        
+        - in: query     
+          name: userId  
+          schema:
+            type: integer   
+          description: ID of the user   
+
+      responses:       
+        '200':           
+          description: Getting the user's watchlist   
+          content:
+            application/json:   
+              schema:            
+                type: array     
+                items:           
+                  type: object  
+                  properties:    
+                    currencyCode:
+                      type: string  
+                    alertAbove:
+                      type: number   
+                    alertBelow:
+                      type: number  
+
+
+
+  
