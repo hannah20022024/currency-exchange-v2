@@ -1,0 +1,25 @@
+/currency:
+    get:
+      summary: Get available currencies
+      parameters:
+        - in: query
+          name: code
+          schema:
+            type: string
+          description: Filter by currency code (fuzzy match)
+      responses:
+        '200':
+          description: A list of currencies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    name:
+                      type: string
+                    rateToUSD:
+                      type: number
